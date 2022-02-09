@@ -41,11 +41,10 @@ class MonteCarloCircle: NSObject, ObservableObject {
     /// - Parameter sender: Any
     func calculateIntegral() async {
         
-        var maxGuesses = 0.0
+        var maxGuesses = 0
         let boundingBoxCalculator = BoundingBox() ///Instantiates Class needed to calculate the area of the bounding box.
         
-        
-        maxGuesses = Double(guesses)
+        maxGuesses = guesses
         
         let newValue = await calculateMonteCarloIntegral(radius: radius, maxGuesses: maxGuesses, leftBnd: 0.0, rightBnd: 1.0)
         
@@ -55,12 +54,10 @@ class MonteCarloCircle: NSObject, ObservableObject {
         
         await updateTotalGuessesString(text: "\(totalGuesses)")
         
-        //totalGuessesString = "\(totalGuesses)"
+        // hard coded to use 0-1 currently
+        integral = totalIntegral/Double(totalGuesses) * boundingBoxCalculator.calculateSurfaceArea(numberOfSides: 2, lengthOfSide1: 1.0, lengthOfSide2: 1.0, lengthOfSide3: 0.0)
         
-        ///Calculates the value of π from the area of a unit circle
-        
-        integral = totalIntegral/Double(totalGuesses) * boundingBoxCalculator.calculateSurfaceArea(numberOfSides: 2, lengthOfSide1: 2.0*radius, lengthOfSide2: 2.0*radius, lengthOfSide3: 0.0)
-        
+        print(integral)
         await updateIntegralString(text: "\(integral)")
         
         //piString = "\(pi)"
@@ -72,11 +69,11 @@ class MonteCarloCircle: NSObject, ObservableObject {
     ///   - radius: radius of circle
     ///   - maxGuesses: number of guesses to use in the calculaton
     /// - Returns: ratio of points inside to total guesses. Must mulitply by area of box in calling function
-    func calculateMonteCarloIntegral(radius: Double, maxGuesses: Double,
+    func calculateMonteCarloIntegral(radius: Double, maxGuesses: Int,
                                      leftBnd: Double, rightBnd: Double) async -> Double {
         
-        var numberOfGuesses = 0.0
-        var pointsInRadius = 0.0
+        var numberOfGuesses = 0
+        var pointsUnderCurve = 0 // should be int
         var integral = 0.0
         var point = (xPoint: 0.0, yPoint: 0.0)
         var testPoint = 0.0
@@ -87,7 +84,7 @@ class MonteCarloCircle: NSObject, ObservableObject {
         // doing e^-x as a default at first, may be able to extrapolate to general function later
         // only problem is computing maximum along boundary, here assuming it happens on bounds of
         // the interval of integration
-        let downBnd = min(computeExpMinusX(x: leftBnd), computeExpMinusX(x: rightBnd))
+        let downBnd = min(0,min(computeExpMinusX(x: leftBnd), computeExpMinusX(x: rightBnd)))
         let upBnd = max(computeExpMinusX(x: leftBnd), computeExpMinusX(x: rightBnd))
         
         while numberOfGuesses < maxGuesses {
@@ -95,23 +92,22 @@ class MonteCarloCircle: NSObject, ObservableObject {
             // get a point
             point.xPoint = Double.random(in: leftBnd...rightBnd) // x value
             point.yPoint = Double.random(in: downBnd...upBnd) // compare this to f(x) to see if inside
-            
+//            print("x " + String(point.xPoint))
+//            print("y " + String(point.yPoint))
             testPoint = computeExpMinusX(x: point.xPoint)
             
             if(point.yPoint < testPoint){ // underneath the curve, count it
-                pointsInRadius += 1.0
+                pointsUnderCurve += 1
                 newInsidePoints.append(point)
                 
-            }
-            else { //outside the curve dont count it
+            } else { // above the curve dont count it
                 newOutsidePoints.append(point)
             }
             
-            numberOfGuesses += 1.0
+            numberOfGuesses += 1
         }
         
-        
-        integral = Double(pointsInRadius)
+        integral = Double(pointsUnderCurve)
         
         //Append the points to the arrays needed for the displays
         //Don't attempt to draw more than 250,000 points to keep the display updating speed reasonable.

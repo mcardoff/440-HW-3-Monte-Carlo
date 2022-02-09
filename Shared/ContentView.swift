@@ -50,14 +50,14 @@ struct ContentView: View {
                 }
                 
                 VStack(alignment: .center) {
-                    Text("π")
+                    Text("Integral")
                         .font(.callout)
                         .bold()
                     TextField("# π", text: $integralString)
                         .padding()
                 }
                 
-                Button("Cycle Calculation", action: {Task.init{await self.calculateIntegral()}})
+                Button("Cycle Calculation", action: { Task.init{await self.calculateIntegral()} })
                     .padding()
                     .disabled(monteCarlo.enableButton == false)
                 
@@ -89,9 +89,7 @@ struct ContentView: View {
     
     func calculateIntegral() async {
         
-        
         monteCarlo.setButtonEnable(state: false)
-        
         monteCarlo.guesses = Int(guessString)!
         monteCarlo.radius = radius
         monteCarlo.totalGuesses = Int(totalGuessString) ?? Int(0.0)
@@ -100,7 +98,8 @@ struct ContentView: View {
         
         totalGuessString = monteCarlo.totalGuessesString
         
-        integral =  monteCarlo.integral
+        integral = monteCarlo.integral
+        integralString = monteCarlo.integralString
         
         monteCarlo.setButtonEnable(state: true)
         
