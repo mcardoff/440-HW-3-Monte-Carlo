@@ -39,7 +39,7 @@ class MonteCarloCircle: NSObject, ObservableObject {
     /// - Calculates the Value of π using Monte Carlo Integration
     ///
     /// - Parameter sender: Any
-    func calculatePI() async {
+    func calculateIntegral() async {
         
         var maxGuesses = 0.0
         let boundingBoxCalculator = BoundingBox() ///Instantiates Class needed to calculate the area of the bounding box.
@@ -47,7 +47,7 @@ class MonteCarloCircle: NSObject, ObservableObject {
         
         maxGuesses = Double(guesses)
         
-        let newValue = await calculateMonteCarloIntegral(radius: radius, maxGuesses: maxGuesses)
+        let newValue = await calculateMonteCarloIntegral(radius: radius, maxGuesses: maxGuesses, leftBnd: 0.0, rightBnd: 1.0)
         
         totalIntegral = totalIntegral + newValue
         
@@ -64,9 +64,6 @@ class MonteCarloCircle: NSObject, ObservableObject {
         await updateIntegralString(text: "\(integral)")
         
         //piString = "\(pi)"
-        
-        
-        
     }
     
     /// calculates the Monte Carlo Integral of a Circle
@@ -96,17 +93,17 @@ class MonteCarloCircle: NSObject, ObservableObject {
         while numberOfGuesses < maxGuesses {
             
             // get a point
-            point.xPoint = Double.random(in: -leftBnd...rightBnd)
+            point.xPoint = Double.random(in: leftBnd...rightBnd) // x value
+            point.yPoint = Double.random(in: downBnd...upBnd) // compare this to f(x) to see if inside
             
-            testPoint = sqrt(pow(point.xPoint,2.0) + pow(point.yPoint,2.0))
+            testPoint = computeExpMinusX(x: point.xPoint)
             
-            // if inside the circle add to the number of points in the radius
-            if((radius - testPoint) >= 0.0){
+            if(point.yPoint < testPoint){ // underneath the curve, count it
                 pointsInRadius += 1.0
                 newInsidePoints.append(point)
                 
             }
-            else { //if outside the circle do not add to the number of points in the radius
+            else { //outside the curve dont count it
                 newOutsidePoints.append(point)
             }
             
