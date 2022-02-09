@@ -13,10 +13,20 @@
 		2C36D51127ADE4790090028B /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36D51027ADE4790090028B /* Tests_macOSLaunchTests.swift */; };
 		2C36D51227ADE4790090028B /* Monte_Carlo_IntegrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36D4EA27ADE4760090028B /* Monte_Carlo_IntegrateApp.swift */; };
 		2C36D51327ADE4790090028B /* Monte_Carlo_IntegrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36D4EA27ADE4760090028B /* Monte_Carlo_IntegrateApp.swift */; };
-		2C36D51427ADE4790090028B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36D4EB27ADE4760090028B /* ContentView.swift */; };
-		2C36D51527ADE4790090028B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36D4EB27ADE4760090028B /* ContentView.swift */; };
 		2C36D51627ADE4790090028B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C36D4EC27ADE4780090028B /* Assets.xcassets */; };
 		2C36D51727ADE4790090028B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C36D4EC27ADE4780090028B /* Assets.xcassets */; };
+		2C63AFD227B354960001518B /* MonteCarloCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD127B354950001518B /* MonteCarloCircle.swift */; };
+		2C63AFD327B354960001518B /* MonteCarloCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD127B354950001518B /* MonteCarloCircle.swift */; };
+		2C63AFD427B354960001518B /* MonteCarloCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD127B354950001518B /* MonteCarloCircle.swift */; };
+		2C63AFD627B354A40001518B /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD527B354A40001518B /* BoundingBox.swift */; };
+		2C63AFD727B354A40001518B /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD527B354A40001518B /* BoundingBox.swift */; };
+		2C63AFD827B354A40001518B /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD527B354A40001518B /* BoundingBox.swift */; };
+		2C63AFDA27B354F00001518B /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD927B354F00001518B /* DrawingView.swift */; };
+		2C63AFDB27B354F00001518B /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD927B354F00001518B /* DrawingView.swift */; };
+		2C63AFDC27B354F00001518B /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFD927B354F00001518B /* DrawingView.swift */; };
+		2C63AFDE27B354F80001518B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFDD27B354F80001518B /* ContentView.swift */; };
+		2C63AFDF27B354F80001518B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFDD27B354F80001518B /* ContentView.swift */; };
+		2C63AFE027B354F80001518B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C63AFDD27B354F80001518B /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +48,6 @@
 
 /* Begin PBXFileReference section */
 		2C36D4EA27ADE4760090028B /* Monte_Carlo_IntegrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monte_Carlo_IntegrateApp.swift; sourceTree = "<group>"; };
-		2C36D4EB27ADE4760090028B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C36D4EC27ADE4780090028B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C36D4F127ADE4790090028B /* Monte Carlo Integrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monte Carlo Integrate.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C36D4F727ADE4790090028B /* Monte Carlo Integrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monte Carlo Integrate.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +58,10 @@
 		2C36D50A27ADE4790090028B /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C36D50E27ADE4790090028B /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		2C36D51027ADE4790090028B /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		2C63AFD127B354950001518B /* MonteCarloCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonteCarloCircle.swift; sourceTree = "<group>"; };
+		2C63AFD527B354A40001518B /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		2C63AFD927B354F00001518B /* DrawingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
+		2C63AFDD27B354F80001518B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = "../../../../../Documents/Monte-Carlo-Integration/Shared/ContentView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				2C36D4EA27ADE4760090028B /* Monte_Carlo_IntegrateApp.swift */,
-				2C36D4EB27ADE4760090028B /* ContentView.swift */,
+				2C63AFDD27B354F80001518B /* ContentView.swift */,
+				2C63AFD927B354F00001518B /* DrawingView.swift */,
+				2C63AFD127B354950001518B /* MonteCarloCircle.swift */,
+				2C63AFD527B354A40001518B /* BoundingBox.swift */,
 				2C36D4EC27ADE4780090028B /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -299,8 +315,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C36D51427ADE4790090028B /* ContentView.swift in Sources */,
 				2C36D51227ADE4790090028B /* Monte_Carlo_IntegrateApp.swift in Sources */,
+				2C63AFDE27B354F80001518B /* ContentView.swift in Sources */,
+				2C63AFDA27B354F00001518B /* DrawingView.swift in Sources */,
+				2C63AFD227B354960001518B /* MonteCarloCircle.swift in Sources */,
+				2C63AFD627B354A40001518B /* BoundingBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,8 +327,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C36D51527ADE4790090028B /* ContentView.swift in Sources */,
 				2C36D51327ADE4790090028B /* Monte_Carlo_IntegrateApp.swift in Sources */,
+				2C63AFDF27B354F80001518B /* ContentView.swift in Sources */,
+				2C63AFDB27B354F00001518B /* DrawingView.swift in Sources */,
+				2C63AFD327B354960001518B /* MonteCarloCircle.swift in Sources */,
+				2C63AFD727B354A40001518B /* BoundingBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +350,10 @@
 			files = (
 				2C36D51127ADE4790090028B /* Tests_macOSLaunchTests.swift in Sources */,
 				2C36D50F27ADE4790090028B /* Tests_macOS.swift in Sources */,
+				2C63AFE027B354F80001518B /* ContentView.swift in Sources */,
+				2C63AFDC27B354F00001518B /* DrawingView.swift in Sources */,
+				2C63AFD427B354960001518B /* MonteCarloCircle.swift in Sources */,
+				2C63AFD827B354A40001518B /* BoundingBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
