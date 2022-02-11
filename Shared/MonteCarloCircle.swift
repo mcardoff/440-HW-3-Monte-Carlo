@@ -53,7 +53,6 @@ class MonteCarloCircle: NSObject, ObservableObject {
         // hard coded to use 0-1 currently
         integral = totalIntegral/Double(totalGuesses) * boundingBoxCalculator.calculateSurfaceArea(numberOfSides: 2, lengthOfSide1: 1.0, lengthOfSide2: 1.0, lengthOfSide3: 0.0)
         
-        print(integral)
         await updateIntegralString(text: "\(integral)")
         
         //piString = "\(pi)"
