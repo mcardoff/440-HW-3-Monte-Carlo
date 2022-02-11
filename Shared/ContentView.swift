@@ -22,16 +22,13 @@ struct ContentView: View {
     @State var totalGuessString = "0"
     @State var integralString = "0.0"
     
-    
     // Setup the GUI to monitor the data from the Monte Carlo Integral Calculator
     @ObservedObject var monteCarlo = MonteCarloCircle(withData: true)
     
     //Setup the GUI View
     var body: some View {
         HStack{
-            
             VStack{
-                
                 VStack(alignment: .center) {
                     Text("Guesses")
                         .font(.callout)
@@ -75,8 +72,6 @@ struct ContentView: View {
             .padding()
             
             //DrawingField
-            
-            
             drawingView(redLayer:$monteCarlo.insideData, blueLayer: $monteCarlo.outsideData)
                 .padding()
                 .aspectRatio(1, contentMode: .fit)
@@ -91,16 +86,13 @@ struct ContentView: View {
         
         monteCarlo.setButtonEnable(state: false)
         monteCarlo.guesses = Int(guessString)!
-        monteCarlo.radius = radius
         monteCarlo.totalGuesses = Int(totalGuessString) ?? Int(0.0)
         
         await monteCarlo.calculateIntegral()
         
         totalGuessString = monteCarlo.totalGuessesString
-        
         integral = monteCarlo.integral
         integralString = monteCarlo.integralString
-        
         monteCarlo.setButtonEnable(state: true)
         
     }

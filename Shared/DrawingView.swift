@@ -13,10 +13,9 @@ struct drawingView: View {
     @Binding var blueLayer : [(xPoint: Double, yPoint: Double)]
     
     var body: some View {
-    
+        
         
         ZStack{
-        
             drawIntegral(drawingPoints: redLayer )
                 .stroke(Color.red)
             
@@ -31,16 +30,14 @@ struct drawingView: View {
 
 struct DrawingView_Previews: PreviewProvider {
     
-    @State static var redLayer : [(xPoint: Double, yPoint: Double)] = [(0, 0), (1, 0), (1, 1), (0, 1)]
-    @State static var blueLayer : [(xPoint: Double, yPoint: Double)] = [(0, 0), (1, 0), (1, 1), (0, 1)]
+    @State static var redLayer : [(xPoint: Double, yPoint: Double)]  = [(0, 0), (0, 1), (1, 1), (1, 0)]
+    @State static var blueLayer : [(xPoint: Double, yPoint: Double)] = [(0, 0), (0, 1), (1, 1), (1, 0)]
     
     static var previews: some View {
-       
-        
         drawingView(redLayer: $redLayer, blueLayer: $blueLayer)
             .aspectRatio(1, contentMode: .fill)
-            //.drawingGroup()
-           
+        //.drawingGroup()
+        
     }
 }
 
@@ -51,20 +48,18 @@ struct drawIntegral: Shape {
     var drawingPoints: [(xPoint: Double, yPoint: Double)]  ///Array of tuples
     
     func path(in rect: CGRect) -> Path {
-        
-               
         // draw from the center of our rectangle
-        let center = CGPoint(x: 0, y: 0)
+        let center = CGPoint(x: 0, y: rect.height)
         let scale = rect.width
-
+        
         // Create the Path for the display
-        
         var path = Path()
-        
         for item in drawingPoints {
-            path.addRect(CGRect(x: item.xPoint*Double(scale)+Double(center.x), y: item.yPoint*Double(scale)+Double(center.y), width: 1.0 , height: 1.0))
+            path.addRect(CGRect(
+                x: item.xPoint*Double(scale)+Double(center.x),
+                y: -item.yPoint*Double(scale)+Double(center.y),
+                width: 1.0 , height: 1.0))
         }
-
         return (path)
     }
 }

@@ -21,16 +21,12 @@ class MonteCarloCircle: NSObject, ObservableObject {
     var guesses = 1
     var totalGuesses = 0
     var totalIntegral = 0.0
-    var radius = 1.0
     var firstTimeThroughLoop = true
     
     @MainActor init(withData data: Bool){
-        
         super.init()
-        
         insideData = []
         outsideData = []
-        
     }
     
     
@@ -46,7 +42,7 @@ class MonteCarloCircle: NSObject, ObservableObject {
         
         maxGuesses = guesses
         
-        let newValue = await calculateMonteCarloIntegral(radius: radius, maxGuesses: maxGuesses, leftBnd: 0.0, rightBnd: 1.0)
+        let newValue = await calculateMonteCarloIntegral(maxGuesses: maxGuesses, leftBnd: 0.0, rightBnd: 1.0)
         
         totalIntegral = totalIntegral + newValue
         
@@ -69,8 +65,7 @@ class MonteCarloCircle: NSObject, ObservableObject {
     ///   - radius: radius of circle
     ///   - maxGuesses: number of guesses to use in the calculaton
     /// - Returns: ratio of points inside to total guesses. Must mulitply by area of box in calling function
-    func calculateMonteCarloIntegral(radius: Double, maxGuesses: Int,
-                                     leftBnd: Double, rightBnd: Double) async -> Double {
+    func calculateMonteCarloIntegral(maxGuesses: Int, leftBnd: Double, rightBnd: Double) async -> Double {
         
         var numberOfGuesses = 0
         var pointsUnderCurve = 0 // should be int
@@ -112,22 +107,16 @@ class MonteCarloCircle: NSObject, ObservableObject {
         //Append the points to the arrays needed for the displays
         //Don't attempt to draw more than 250,000 points to keep the display updating speed reasonable.
         
-        if ((totalGuesses < 500001) || (firstTimeThroughLoop)){
-            
-            //            insideData.append(contentsOf: newInsidePoints)
-            //            outsideData.append(contentsOf: newOutsidePoints)
-            
+        if ((totalGuesses < 500001) || (firstTimeThroughLoop)) {
             var plotInsidePoints = newInsidePoints
             var plotOutsidePoints = newOutsidePoints
             
             if (newInsidePoints.count > 750001) {
-                
                 plotInsidePoints.removeSubrange(750001..<newInsidePoints.count)
             }
             
             if (newOutsidePoints.count > 750001){
                 plotOutsidePoints.removeSubrange(750001..<newOutsidePoints.count)
-                
             }
             await updateData(insidePoints: plotInsidePoints, outsidePoints: plotOutsidePoints)
             firstTimeThroughLoop = false
@@ -155,9 +144,7 @@ class MonteCarloCircle: NSObject, ObservableObject {
     /// The function runs on the main thread so it can update the GUI
     /// - Parameter text: contains the string containing the number of total guesses
     @MainActor func updateTotalGuessesString(text:String){
-        
         self.totalGuessesString = text
-        
     }
     
     /// updateIntegralString
@@ -177,16 +164,12 @@ class MonteCarloCircle: NSObject, ObservableObject {
                     self.enableButton = true
                 }
             }
-        }
-        else{
+        } else {
             Task.init {
                 await MainActor.run {
                     self.enableButton = false
                 }
             }
-            
         }
-        
     }
-    
 }
