@@ -22,6 +22,9 @@ struct ContentView: View {
     @State var totalGuessString = "0"
     @State var integralString = "0.0"
     
+    @State var analytic = 0.6321205588285586
+    @State var errString = ""
+    
     // Setup the GUI to monitor the data from the Monte Carlo Integral Calculator
     @ObservedObject var monteCarlo = MonteCarloCircle(withData: true)
     
@@ -33,8 +36,10 @@ struct ContentView: View {
                     Text("Guesses")
                         .font(.callout)
                         .bold()
-                    TextField("# Guesses", text: $guessString)
+                    TextField("# Guesses", text: $guessString,
+                              onCommit: { Task.init { await self.calculateIntegral() } } )
                         .padding()
+                        .frame(width:150)
                 }
                 .padding(.top, 5.0)
                 
@@ -44,6 +49,7 @@ struct ContentView: View {
                         .bold()
                     TextField("# Total Guesses", text: $totalGuessString)
                         .padding()
+                        .frame(width:150)
                 }
                 
                 VStack(alignment: .center) {
@@ -52,6 +58,16 @@ struct ContentView: View {
                         .bold()
                     TextField("# π", text: $integralString)
                         .padding()
+                        .frame(width:150)
+                }
+                
+                VStack(alignment: .center) {
+                    Text("% Error")
+                        .font(.callout)
+                        .bold()
+                    TextField("% err", text: $errString)
+                        .padding()
+                        .frame(width:150)
                 }
                 
                 Button("Cycle Calculation", action: { Task.init{await self.calculateIntegral()} })
@@ -94,6 +110,8 @@ struct ContentView: View {
         integral = monteCarlo.integral
         integralString = monteCarlo.integralString
         monteCarlo.setButtonEnable(state: true)
+        let err = 100 * abs(integral - analytic) / analytic
+        errString = String(format: "%0.2f", err)
         
     }
     
