@@ -21,6 +21,17 @@ class Tests_macOS: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testLargeError() async throws {
+        let analytic = 0.6321205588285586
+        let monteCarlo = await MonteCarloCircle(withData: true)
+        monteCarlo.guesses = 5000000
+        await monteCarlo.calculateIntegral()
+        
+        let integral = monteCarlo.integral
+        
+        XCTAssertEqual(integral, analytic, accuracy: 0.0001, "expected better from you")
+    }
 
     func testExample() throws {
         // UI tests must launch the application that they test.
